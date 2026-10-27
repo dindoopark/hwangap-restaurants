@@ -1,0 +1,204 @@
+<title>환갑잔치 식당 후보</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: 한지 바탕 위 세 장의 식당 카드를 세로로. 카드마다 풍경 사진 한 장을 크게, 룸·메뉴 사진을 나란히 두고 설명을 잇는다. 끝에 비교표와 예약 체크리스트 */
+:root{
+  --bg:#F8F8F5; --paper:#FFFFFF; --ink:#1F2433; --muted:#5E6474; --line:#E2E2DC;
+  --indigo:#2E3F7A; --indigo-soft:#E9ECF6; --gold:#A97C2C; --gold-soft:#F6EEDD;
+  --shade:rgba(20,22,30,.72); --on-shade:#FFFFFF;
+  --display:"Gowun Batang","Noto Serif KR",serif;
+  --body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14161D; --paper:#1C1F29; --ink:#ECEDF2; --muted:#A3A8B6; --line:#2F3342;
+  --indigo:#9DAEEB; --indigo-soft:#262C44; --gold:#D9B26A; --gold-soft:#332A1A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14161D; --paper:#1C1F29; --ink:#ECEDF2; --muted:#A3A8B6; --line:#2F3342;
+  --indigo:#9DAEEB; --indigo-soft:#262C44; --gold:#D9B26A; --gold-soft:#332A1A; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7}
+.wrap{max-width:760px;margin:0 auto;padding-block:40px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:36px}
+header{display:flex;flex-direction:column;gap:10px;text-align:left}
+.seal{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border:2px solid var(--gold);
+  color:var(--gold);font-family:var(--display);font-weight:700;font-size:22px;border-radius:6px;transform:rotate(-3deg)}
+h1{font-family:var(--display);font-size:clamp(28px,6vw,40px);line-height:1.25;margin:6px 0 0;text-wrap:balance}
+.lead{color:var(--muted);margin:0;max-width:60ch}
+h2{font-family:var(--display);font-size:26px;margin:0;line-height:1.3}
+.place{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.place-head{padding:22px 22px 18px;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--line)}
+.tag{align-self:flex-start;font-size:13px;font-weight:700;color:var(--indigo);background:var(--indigo-soft);padding:3px 10px;border-radius:999px}
+.oneline{font-family:var(--display);font-size:19px;color:var(--gold);margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:4px 16px;color:var(--muted);font-size:15px;font-variant-numeric:tabular-nums}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--line);border-bottom:1px solid var(--line)}
+.photos figure{margin:0;position:relative;aspect-ratio:1/1;max-width:100%;overflow:hidden;background:var(--indigo-soft)}
+.photos figure.wide{grid-column:1/-1;aspect-ratio:16/9}
+.photos img{width:100%;height:100%;object-fit:cover;display:block}
+.photos figcaption{position:absolute;left:10px;bottom:10px;right:10px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;pointer-events:none}
+.photos figcaption b{background:var(--shade);color:var(--on-shade);font-size:13px;padding:2px 10px;border-radius:999px;letter-spacing:.04em}
+.photos figcaption span{background:var(--shade);color:var(--on-shade);font-size:12.5px;padding:1px 8px;border-radius:6px;line-height:1.6}
+.inner{padding:14px 22px 16px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.inner-k{font-weight:700;color:var(--indigo);font-size:16px}
+.inner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.inner-grid figure{margin:0;display:flex;flex-direction:column;gap:4px;min-width:0}
+.inner-grid img{width:100%;max-width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;display:block;background:var(--indigo-soft)}
+.inner-grid figcaption{font-size:13px;color:var(--muted);line-height:1.4}
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:88px 1fr;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row-k{font-weight:700;color:var(--indigo);font-size:16px}
+.row-v{min-width:0}
+.row-v p{margin:0}
+.note{background:var(--gold-soft);color:var(--ink);font-size:15px;padding:12px 22px;margin:0}
+.note b{color:var(--gold)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;padding:16px 22px 22px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;border:1.5px solid var(--indigo);color:var(--indigo)}
+.btn.primary{background:var(--indigo);color:var(--paper)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.tel{font-variant-numeric:tabular-nums;user-select:all;font-weight:700}
+.table-wrap{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--display);font-size:17px;color:var(--indigo);background:var(--indigo-soft)}
+tbody th{font-weight:500;color:var(--muted);white-space:nowrap}
+tr:last-child td,tr:last-child th{border-bottom:0}
+.good{color:var(--indigo);font-weight:700}
+.slots{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:6px}
+.slots-k{font-size:14px;font-weight:700;color:var(--ink)}
+.slot{font-variant-numeric:tabular-nums;font-weight:700;font-size:15px;color:var(--gold);background:var(--gold-soft);border:1px solid var(--gold);padding:2px 12px;border-radius:8px}
+.slots-sub{font-size:14px;color:var(--muted)}
+section{display:flex;flex-direction:column;gap:14px}
+footer{color:var(--muted);font-size:14px}
+@media (max-width:480px){.row{grid-template-columns:1fr;gap:4px}.photos figcaption span{display:none}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="seal" aria-hidden="true">壽</div>
+  <h1>환갑잔치 식당 후보 세 곳</h1>
+  <p class="lead">용인에서 룸을 잡을 수 있는 한식당을 골라 정리했습니다. 식당마다 <b>풍경·룸·메뉴</b> 사진을 한 장씩 넣었어요. 사진은 구글 지도에 방문객이 올린 것이고, 더 보고 싶으면 <b>사진 더 보기</b>를 누르세요.</p>
+</header>
+
+<article class="place">
+  <div class="place-head">
+    <span class="tag">기흥 · 고급 한정식</span>
+    <h2>호생원</h2>
+    <p class="oneline">가장 격식 있고 넉넉한 곳</p>
+    <div class="meta"><span>용인 기흥구 기흥단지로 58</span><span>매일 11:00–22:00</span><span>구글 평점 4.1 (454명)</span></div>
+    <div class="slots"><span class="slots-k">예약 가능</span><span class="slot">모든 시간</span></div>
+  </div>
+  <div class="photos">
+    <figure class="wide"><img src="img/hs_land.jpg" alt="호생원 단독 건물 외관, 저녁 조명이 켜진 모습"><figcaption><b>풍경</b><span>단독 건물 외관</span></figcaption></figure>
+    <figure><img src="img/hs_room.jpg" alt="호생원 룸, 가운데 숯불 화로가 있는 긴 테이블"><figcaption><b>룸</b><span>화로 있는 긴 테이블</span></figcaption></figure>
+    <figure><img src="img/hs_menu.jpg" alt="호생원 숯불 위에서 굽는 고기와 반찬"><figcaption><b>메뉴</b><span>숯불구이 상차림</span></figcaption></figure>
+  </div>
+  <div class="inner">
+    <div class="inner-k">내부 사진</div>
+    <div class="inner-grid">
+      <figure><img src="img/hs_in1.jpg" alt="호생원 단체 룸, 긴 테이블에 상이 차려진 모습"><figcaption>단체 룸 (긴 테이블)</figcaption></figure>
+      <figure><img src="img/hs_in2.jpg" alt="호생원 룸, TV가 있는 벽과 창가 좌석"><figcaption>TV 있는 룸</figcaption></figure>
+      <figure><img src="img/hs_in3.jpg" alt="호생원 소규모 룸, 화로 테이블과 창문"><figcaption>소규모 룸</figcaption></figure>
+    </div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="row-k">풍경</div><div class="row-v"><p>단독 건물에 주차장이 넓어 여러 차량이 와도 여유롭습니다.</p></div></div>
+    <div class="row"><div class="row-k">룸</div><div class="row-v"><p>대형 룸이 있어 친척 모임 규모도 수용됩니다. 기업 접대에도 쓰이는 단정하고 격식 있는 분위기입니다.</p></div></div>
+    <div class="row"><div class="row-k">메뉴</div><div class="row-v"><p>한정식 코스. 육회와 복어 곁들임 반찬이 이 집의 특색으로 꼽힙니다. 사진처럼 테이블 화로에 고기를 굽는 구성도 있습니다.</p></div></div>
+  </div>
+  <p class="note"><b>이런 분께</b> 어른들 모시고 제대로 차린 자리를 원할 때</p>
+  <div class="actions">
+    <a class="btn primary" href="https://map.naver.com/p/search/%ED%98%B8%EC%83%9D%EC%9B%90%20%EC%9A%A9%EC%9D%B8" target="_blank" rel="noopener">사진 더 보기 (네이버)</a>
+    <a class="btn" href="https://maps.google.com/?cid=4894928456953552416" target="_blank" rel="noopener">구글 지도</a>
+    <span class="btn" aria-label="전화번호">☎ <span class="tel">031-284-3366</span></span>
+  </div>
+</article>
+
+<article class="place">
+  <div class="place-head">
+    <span class="tag">수지 신봉동 · 한정식</span>
+    <h2>연지한정식</h2>
+    <p class="oneline">숲속 정원이 있는 아늑한 한정식집</p>
+    <div class="meta"><span>용인 수지구 신봉1로 291</span><span>점심 11:30 영업 시작</span><span>구글 평점 3.9 (643명)</span></div>
+    <div class="slots"><span class="slots-k">예약 가능</span><span class="slot">11:00</span><span class="slot">13:30</span><span class="slots-sub">각 2시간 이용</span></div>
+  </div>
+  <div class="photos">
+    <figure class="wide"><img src="img/yj_land.jpg" alt="연지한정식 정원, 큰 나무 그늘 아래 데크와 파라솔"><figcaption><b>풍경</b><span>큰 나무 아래 정원</span></figcaption></figure>
+    <figure><img src="img/yj_menu1.jpg" alt="연지한정식 놋그릇에 담긴 반찬과 밥, 찌개"><figcaption><b>메뉴</b><span>놋그릇 한상</span></figcaption></figure>
+    <figure><img src="img/yj_menu2.jpg" alt="연지한정식 솥밥과 생선구이, 반찬 상차림"><figcaption><b>메뉴</b><span>솥밥 상차림</span></figcaption></figure>
+  </div>
+  <div class="inner">
+    <div class="inner-k">내부 사진</div>
+    <div class="inner-grid">
+      <figure><img src="img/yj_in1.jpg" alt="연지한정식 유리 온실형 홀, 샹들리에와 돌벽"><figcaption>유리창 홀 (샹들리에)</figcaption></figure>
+      <figure><img src="img/yj_in2.jpg" alt="연지한정식 목조 서까래가 보이는 홀"><figcaption>목조 서까래 홀</figcaption></figure>
+      <figure><img src="img/yj_in3.jpg" alt="연지한정식 돌벽 입구와 안쪽 식사 공간"><figcaption>입구 쪽 공간</figcaption></figure>
+    </div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="row-k">풍경</div><div class="row-v"><p>신봉동 안쪽 나무숲 사이에 자리 잡았습니다. 큰 나무 아래 정원이 있어 식사 전후로 가족사진 찍기 좋고, 후기에 정원과 주차 이야기가 자주 나옵니다.</p></div></div>
+    <div class="row"><div class="row-k">룸</div><div class="row-v"><p>단체석이 있어 가족 모임과 상견례 장소로 소개됩니다. 위 내부 사진은 홀이고, 독립 룸 사진은 찾지 못했습니다. 룸이 있는지는 전화로 확인하세요.</p></div></div>
+    <div class="row"><div class="row-k">메뉴</div><div class="row-v"><p>두레상·수라상·연회상 코스. 미리 차려두지 않고 코스마다 바로 조리해 낸다는 후기가 있습니다.</p></div></div>
+  </div>
+  <p class="note"><b>미리 알아두기</b> 입구가 골목 안쪽이라 지나치기 쉽다는 후기가 있어요. 어르신들께는 주소와 함께 정원 사진을 미리 보내드리면 찾기 쉽습니다.</p>
+  <div class="actions">
+    <a class="btn primary" href="https://map.naver.com/p/search/%EC%97%B0%EC%A7%80%ED%95%9C%EC%A0%95%EC%8B%9D%20%EC%8B%A0%EB%B4%89%EB%8F%99" target="_blank" rel="noopener">사진 더 보기 (네이버)</a>
+    <a class="btn" href="https://www.google.com/maps/place/%EC%97%B0%EC%A7%80%ED%95%9C%EC%A0%95%EC%8B%9D/data=!4m2!3m1!1s0x357b5be8e70675b5:0x8f57f68fa8cf2999" target="_blank" rel="noopener">구글 지도</a>
+    <span class="btn" aria-label="전화번호">☎ <span class="tel">031-896-5678</span></span>
+  </div>
+</article>
+
+<article class="place">
+  <div class="place-head">
+    <span class="tag">수지 동천동 · 대형 한식당</span>
+    <h2>오월식당</h2>
+    <p class="oneline">맛 위주의 편안한 가족 식사</p>
+    <div class="meta"><span>용인 수지구 동천로 409</span><span>매일 11:00–21:00</span><span>구글 평점 3.8 (466명)</span></div>
+    <div class="slots"><span class="slots-k">예약 가능</span><span class="slot">11:00</span></div>
+  </div>
+  <div class="photos">
+    <figure class="wide"><img src="img/ow_land.jpg" alt="오월식당 한옥 건물과 소나무 정원, 뒤로 보이는 산"><figcaption><b>풍경</b><span>한옥과 소나무 정원</span></figcaption></figure>
+    <figure><img src="img/ow_room.jpg" alt="오월식당 창가 원목 테이블에 차려진 반찬과 잡채"><figcaption><b>실내</b><span>창가 원목 테이블</span></figcaption></figure>
+    <figure><img src="img/ow_menu.jpg" alt="오월식당 대표 메뉴 단호박 갈비찜"><figcaption><b>메뉴</b><span>단호박 갈비찜</span></figcaption></figure>
+  </div>
+  <div class="inner">
+    <div class="inner-k">내부 사진</div>
+    <div class="inner-grid">
+      <figure><img src="img/ow_in1.jpg" alt="오월식당 천창이 있는 밝은 홀"><figcaption>천창 있는 홀</figcaption></figure>
+      <figure><img src="img/ow_in2.jpg" alt="오월식당 창밖으로 산이 보이는 좌석"><figcaption>창밖 산 풍경 좌석</figcaption></figure>
+      <figure><img src="img/ow_in3.jpg" alt="오월식당 홀 전경, 창가 테이블들"><figcaption>홀 전경</figcaption></figure>
+    </div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="row-k">풍경</div><div class="row-v"><p>교외의 한옥 건물로, 소나무 정원과 뒷산이 어우러져 단체 사진 찍기 좋습니다. 공간도 넓습니다.</p></div></div>
+    <div class="row"><div class="row-k">룸</div><div class="row-v"><p>공개된 룸 사진이 거의 없어 위 사진은 홀 좌석입니다. 예약 전화 때 룸 사진을 카톡으로 받아보세요.</p></div></div>
+    <div class="row"><div class="row-k">메뉴</div><div class="row-v"><p>대표 메뉴는 단호박 갈비찜. 달큰한 갈비가 단호박에 담겨 나와 어른들 입맛에도 잘 맞습니다.</p></div></div>
+  </div>
+  <p class="note"><b>이런 분께</b> 격식보다 음식 맛과 편안함을 우선할 때</p>
+  <div class="actions">
+    <a class="btn primary" href="https://map.naver.com/p/search/%EC%98%A4%EC%9B%94%EC%8B%9D%EB%8B%B9%20%EB%8F%99%EC%B2%9C%EB%8F%99" target="_blank" rel="noopener">사진 더 보기 (네이버)</a>
+    <a class="btn" href="https://www.instagram.com/owol_2009" target="_blank" rel="noopener">인스타그램</a>
+    <span class="btn" aria-label="전화번호">☎ <span class="tel">070-8865-2009</span></span>
+  </div>
+</article>
+
+<section>
+  <h2>한눈에 비교</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th></th><th>호생원</th><th>연지</th><th>오월식당</th></tr></thead>
+    <tbody>
+      <tr><th>예약 가능 시간</th><td class="good">모든 시간</td><td>11:00, 13:30<br>(각 2시간)</td><td>11:00</td></tr>
+      <tr><th>분위기</th><td class="good">가장 격식</td><td>숲속 정원·아늑함</td><td>한옥·편안함</td></tr>
+      <tr><th>룸</th><td class="good">대형 룸 확인</td><td>단체석 있음, 룸은 확인 필요</td><td>전화 확인 필요</td></tr>
+      <tr><th>주차</th><td class="good">넓음</td><td>있음</td><td>넓은 편</td></tr>
+      <tr><th>어르신 이동</th><td class="good">편함</td><td>확인 필요</td><td>확인 필요</td></tr>
+      <tr><th>대표 메뉴</th><td>한정식 코스</td><td>두레상·수라상·연회상</td><td>단호박 갈비찜</td></tr>
+      <tr><th>위치</th><td>기흥</td><td>수지 신봉동</td><td>수지 동천동</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>평점과 영업시간은 2026년 10월 구글 지도 기준입니다. 사진은 구글 지도 방문객 사진이며 실제와 다를 수 있습니다. 방문 전 전화로 한 번 더 확인하세요.</footer>
+</div>
